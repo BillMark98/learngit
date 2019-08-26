@@ -68,6 +68,7 @@ error: the following file has changes staged in the index:
 it says that the file has changes in the staging index, while the head
 has not pointed to that change 
 ![gitkChek](./gitk_chec.png)
+
 so using the hint
 ```
 git rm --cached file.txt
@@ -93,3 +94,6 @@ we get
 LICENSE.pages		file.txt		gitk_chec.png		readme.txt
 MyNotes.md		git_add_diffFile.png	gitk_diff_File.png	sample.rtf
 ```
+
+## Notes on markdown
+here is a link on how to [load image](https://medium.com/markdown-monster-blog/getting-images-into-markdown-documents-and-weblog-posts-with-markdown-monster-9ec6f353d8ec)
