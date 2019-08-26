@@ -96,6 +96,9 @@ MyNotes.md		git_add_diffFile.png	gitk_diff_File.png	sample.rtf
 ```
 
 ## Notes on markdown
-here is a link on how to [load image](https://medium.com/markdown-monster-blog/getting-images-into-markdown-documents-and-weblog-posts-with-markdown-monster-9ec6f353d8ec)
+here are links on 
+* [how to load image](https://medium.com/markdown-monster-blog/getting-images-into-markdown-documents-and-weblog-posts-with-markdown-monster-9ec6f353d8ec)
+* [relationship to html](https://wilsonmar.github.io/markdown-text-for-github-from-html/)
+
 ## Notes on GUI
 here is a link on graphical commands with [Tcl/Tk](http://tldp.org/HOWTO/Scripting-GUI-TclTk/index.html)
