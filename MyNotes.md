@@ -144,5 +144,5 @@ index d0bd5ab..cb73eb4 100644
  echo $c
  ```
  To do
- - [] how to see file in the commited version(not the one in the working area, using cat)
- - [] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
+ - [ ] how to see file in the commited version(not the one in the working area, using cat)
+ - [ ] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
