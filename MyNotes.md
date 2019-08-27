@@ -1,5 +1,5 @@
 # Notes on git
-## using git gui
+## chapter 5 using git gui
 here is a good link to [gitk usage](https://lostechies.com/joshuaflanagan/2010/09/03/use-gitk-to-understand-git/)
 ### gitk command
 after creating file.txt and git add
@@ -102,3 +102,8 @@ here are links on
 
 ## Notes on GUI
 here is a link on graphical commands with [Tcl/Tk](http://tldp.org/HOWTO/Scripting-GUI-TclTk/index.html)
+
+## chapter 7 
+### remove file
+using `git rm filename` if filename already tracked and committed
+and dont have to use `rm` plus `git rm`
