@@ -107,3 +107,42 @@ here is a link on graphical commands with [Tcl/Tk](http://tldp.org/HOWTO/Scripti
 ### remove file
 using `git rm filename` if filename already tracked and committed
 and dont have to use `rm` plus `git rm`
+### adding parts of changes
+initially the file *math.sh*
+```
+# Comments
+a=1
+```
+now modify that to
+```
+# Adding two numbers 
+a=1
+b=2
+# output a and 
+echo $a
+echo $b
+let c=$a+$b
+echo $c
+```
+open gui and add lines wanted for commits (cf book p89)
+after commit
+using `git diff`
+the result
+```
+diff --git a/math.sh b/math.sh
+index d0bd5ab..cb73eb4 100644
+--- a/math.sh
++++ b/math.sh
+@@ -1,5 +1,8 @@
+ # Adding two numbers
+ a=1
+ b=2
++# output a and
++echo $a
++echo $b
+ let c=$a+$b
+ echo $c
+ ```
+ To do
+ [] how to see file in the commited version(not the one in the working area, using cat)
+ [] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
