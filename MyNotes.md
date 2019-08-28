@@ -164,15 +164,11 @@ index 8683b14..01b51be 100644
 +++ b/MyNotes.md
 @@ -144,5 +144,5 @@ index d0bd5ab..cb73eb4 100644
   echo $c
-  ```
-  To do
-- - [] how to see file in the commited version(not the one in the working area, using cat)
-- - [] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
-\ No newline at end of file
-+ - [ ] how to see file in the commited version(not the one in the working area, using cat)
-+ - [ ] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
-\ No newline at end of file
 ```
+*To do*
+- [ ] how to see file in the commited version(not the one in the working area, using cat)
+- [ ] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
+
 * example out put of `git log --stat`
 ```
 commit b474553295189a451c724f6ee034d2177790a018 (HEAD -> master, origin/master, origin/HEAD)
@@ -204,14 +200,10 @@ index 8683b14..01b51be 100644
 @@ -144,5 +144,5 @@ index d0bd5ab..cb73eb4 100644
   echo $c
   ```
-  To do
-- - [] how to see file in the commited version(not the one in the working area, using cat)
-- - [] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
-\ No newline at end of file
-+ - [ ] how to see file in the commited version(not the one in the working area, using cat)
-+ - [ ] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
-\ No newline at end of file
-```
+*To do*
+- [ ] how to see file in the commited version(not the one in the working area, using cat)
+- [ ] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
+
 
 ## git rev-parse
 here is a link to discuss the usage of [`git rev-parse`](https://stackoverflow.com/questions/15798862/what-does-git-rev-parse-do)
