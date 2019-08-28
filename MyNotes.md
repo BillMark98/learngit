@@ -146,3 +146,69 @@ index d0bd5ab..cb73eb4 100644
  To do
  - [ ] how to see file in the commited version(not the one in the working area, using cat)
  - [ ] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
+
+
+ ## chapter 8
+ ### git log
+ * example output of `git log --patch`
+ ```
+ commit b474553295189a451c724f6ee034d2177790a018 (HEAD -> master, origin/master, origin/HEAD)
+Author: BillMark98 <hupanweibill@gmail.com>
+Date:   Tue Aug 27 14:51:15 2019 +0200
+
+    adding task list with squares
+
+diff --git a/MyNotes.md b/MyNotes.md
+index 8683b14..01b51be 100644
+--- a/MyNotes.md
++++ b/MyNotes.md
+@@ -144,5 +144,5 @@ index d0bd5ab..cb73eb4 100644
+  echo $c
+  ```
+  To do
+- - [] how to see file in the commited version(not the one in the working area, using cat)
+- - [] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
+\ No newline at end of file
++ - [ ] how to see file in the commited version(not the one in the working area, using cat)
++ - [ ] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
+\ No newline at end of file
+```
+* example out put of `git log --stat`
+```
+commit b474553295189a451c724f6ee034d2177790a018 (HEAD -> master, origin/master, origin/HEAD)
+Author: BillMark98 <hupanweibill@gmail.com>
+commit b474553295189a451c724f6ee034d2177790a018 (HEAD -> master, origin/master, origin/HEAD)
+Author: BillMark98 <hupanweibill@gmail.com>
+Date:   Tue Aug 27 14:51:15 2019 +0200
+
+    adding task list with squares
+
+ MyNotes.md | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+ ```
+ * combined version using `git log --patch-with-stat`
+ ```
+ commit b474553295189a451c724f6ee034d2177790a018 (HEAD -> master, origin/master, origin/HEAD)
+Author: BillMark98 <hupanweibill@gmail.com>
+Date:   Tue Aug 27 14:51:15 2019 +0200
+
+    adding task list with squares
+---
+ MyNotes.md | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/MyNotes.md b/MyNotes.md
+index 8683b14..01b51be 100644
+--- a/MyNotes.md
++++ b/MyNotes.md
+@@ -144,5 +144,5 @@ index d0bd5ab..cb73eb4 100644
+  echo $c
+  ```
+  To do
+- - [] how to see file in the commited version(not the one in the working area, using cat)
+- - [] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
+\ No newline at end of file
++ - [ ] how to see file in the commited version(not the one in the working area, using cat)
++ - [ ] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
+\ No newline at end of file
+```
