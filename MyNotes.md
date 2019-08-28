@@ -212,3 +212,6 @@ index 8683b14..01b51be 100644
 + - [ ] multiple stages of `git add` how to use `git reset` to come back to a certain changed version ,eg, 3 times of `git add` reset to the second modification
 \ No newline at end of file
 ```
+
+## git rev-parse
+here is a link to discuss the usage of [`git rev-parse`](https://stackoverflow.com/questions/15798862/what-does-git-rev-parse-do)
