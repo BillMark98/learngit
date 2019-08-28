@@ -215,3 +215,18 @@ index 8683b14..01b51be 100644
 
 ## git rev-parse
 here is a link to discuss the usage of [`git rev-parse`](https://stackoverflow.com/questions/15798862/what-does-git-rev-parse-do)
+## git checkout
+git checkout to a previous version
+do some change e.g `chmod 755 math.sh` (the previous mode is 644)
+then `git checkout master`
+```
+error: Your local changes to the following files would be overwritten by checkout:
+	math.sh
+Please commit your changes or stash them before you switch branches.
+Aborting
+```
+to do
+- [ ] how to delete the changes that has not been staged
+
+## some solutions
+list just the most recent N commits? using `git log -n N`
