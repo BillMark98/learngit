@@ -220,5 +220,3 @@ Aborting
 to do
 - [ ] how to delete the changes that has not been staged
 
-## some solutions
-list just the most recent N commits? using `git log -n N`
