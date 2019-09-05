@@ -121,3 +121,38 @@ index 01b51be..4e2dfc0 100644
  ` git rev-parse :/" MESSAGE "` will display the SHA1 ID according to the commit with commit message which contains a substring of MESSAGE
  like `git rev-parse :/" chap8"`
  will display the SHA1 ID with corresponding commit message "some solution to chap8"
+
+ ### 8.5.4
+ first the local ouput of the latest 4 commits
+ ```
+ 075bae0 (HEAD -> master, origin/master, origin/HEAD) some sol to chap8 2
+4a48087 modify MyNotes.md
+1169567 some solution to chap8
+0d8a85c (tag: revNotes) add git rev-parse note on MyNotes.md
+```
+Then checkout to the `revNotes` tag
+```
+0d8a85c (HEAD, tag: revNotes) add git rev-parse note on MyNotes.md
+bb6bf36 (tag: printF) for math.sh: Adding printf This is to make the output more human readble
+b474553 adding task list with squares
+```
+Then create a temp file and commit it
+after using `git checkout master`
+get following message :
+```
+Warning: you are leaving 1 commit behind, not connected to
+any of your branches:
+
+  ac8ba9e detached commit
+
+If you want to keep it by creating a new branch, this may be a good time
+to do so with:
+
+ git branch <new-branch-name> ac8ba9e
+ ```
+ and by looking at the gitk, the commitment in the detached state vanished and the file could not be found either.
+ 
+ So generally the file commited in the detached state will be deleted when we checkout out to master
+
+ ### 8.5.5
+ delete a tag? using `git tag -d TAGNAME`

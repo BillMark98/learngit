@@ -220,3 +220,7 @@ Aborting
 to do
 - [ ] how to delete the changes that has not been staged
 
+# chapter 9
+TO DO:
+- [ ] how to use alias to input like `git lol 4` which means will display 
+the latest 4 commits info? 
