@@ -224,3 +224,20 @@ to do
 TO DO:
 - [ ] how to use alias to input like `git lol 4` which means will display 
 the latest 4 commits info? 
+
+after creating a new branch and doing some changes, swichting back to master successfully :
+```
+BillHus-MBP:learngit bill$ git checkout master
+M	math.sh
+M	newfile.txt
+```
+
+but switch back to the new branch and commit the changes. Now do some changes, switching back
+aborted
+```
+error: Your local changes to the following files would be overwritten by checkout:
+	math.sh
+Please commit your changes or stash them before you switch branches.
+Aborting
+```
+using ` git stash`
