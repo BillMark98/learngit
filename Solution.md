@@ -156,3 +156,25 @@ to do so with:
 
  ### 8.5.5
  delete a tag? using `git tag -d TAGNAME`
+
+ ## chapter 9
+ ### 9.5.2
+ options of `git log`
+ * `--abbrev-commit` abbreviate the commit message, e.g 
+ ```
+ commit e57d80e (HEAD -> master, origin/master, origin/HEAD)
+Author: BillMark98 <hupanweibill@gmail.com>
+Date:   Thu Sep 5 17:44:59 2019 +0200
+.....
+
+```
+instead of 
+```
+commit e57d80e619fa4c2005f2e9048b513c4ccb265c44 (HEAD -> master, origin/master, origin/HEAD)
+Author: BillMark98 <hupanweibill@gmail.com>
+Date:   Thu Sep 5 17:44:59 2019 +0200
+.....
+```
+
+* `--all` (according to man page)
+>   Pretend as if all the refs in refs/, along with HEAD, are listed on the command line as         <commit>   
