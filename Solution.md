@@ -178,3 +178,22 @@ Date:   Thu Sep 5 17:44:59 2019 +0200
 
 * `--all` (according to man page)
 >   Pretend as if all the refs in refs/, along with HEAD, are listed on the command line as         <commit>   
+4. what happens to commits of a branch if branch deleted?
+> the commits will still remain 
+see the picture of the two
+the first is the branch plot before the deletion of the branch `newBranch`
+![chap9B1](chap9_branch1.png) 
+the second is the branch plot after the deletion of the branch `newBranch`
+![chap9B2](chap9_branch2.png)
+We see that the commits still remain.
+
+### 9.5.3
+1. `git checkout branchname` checkout the HEAD to that branch while
+    ` git checkout -- <filename>` checkout the file to the latest commited version
+
+### 9.5.4
+3. find the branches corresponds to the tag
+e.g for `random_prize_1`
+```
+git branch --contains $(git rev-parse random_prize_1)
+```
