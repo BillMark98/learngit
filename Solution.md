@@ -197,3 +197,62 @@ e.g for `random_prize_1`
 ```
 git branch --contains $(git rev-parse random_prize_1)
 ```
+
+## chapter 10
+### Lab
+4. sample output  
+```
+M       baz
+A       newfile.txt
+```  
+Note have to perform `git commit` to see the second message
+
+### 10.6.1
+usage: `git merge-base A B` get the common ancestor of branch A and B 
+e.g  `git merge-base bugfix master` 
+output:  (c.f the `lol` plot in 10.6.3)  
+```
+cafdccf4017057cddc8d386bf87d271414613eea
+```   
+
+### 10.6.3
+after some changes, the output of the `git lol`  
+```
+* 314e2d0 (HEAD -> branchM) add brM:
+* 25dfb36 (master) Committing bar.
+* cef58ee Committing foo.
+| * 530f83a (newBranch) add newBr
+| * 86856e1 (bugfix) add newfile
+| * b4e50fa Ugh, I was dividing by zero!
+| * e8b959a Adding echo to check error.
+|/
+* cafdccf (tag: bug_here) Committing baz.
+* 53b5911 Committing the README.
+```  
+
+Then performing `git merge bugfix newBranch branchM`  
+```
+Merge made by the 'recursive' strategy.
+ baz         | 3 ++-
+ newBr.txt   | 1 +
+ newfile.txt | 1 +
+ 3 files changed, 4 insertions(+), 1 deletion(-)
+ create mode 100644 newBr.txt
+ create mode 100644 newfile.txt
+ ```  
+we get the analog message 
+And the corresponding commit history :   
+```
+*   fd14702 (HEAD -> branchM) Merge branch 'newBranch' into branchM
+|\
+| * 530f83a (newBranch) add newBr
+| * 86856e1 (bugfix) add newfile
+| * b4e50fa Ugh, I was dividing by zero!
+| * e8b959a Adding echo to check error.
+* | 314e2d0 add brM:
+* | 25dfb36 (master) Committing bar.
+* | cef58ee Committing foo.
+|/
+* cafdccf (tag: bug_here) Committing baz.
+* 53b5911 Committing the README.
+``` 

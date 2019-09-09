@@ -241,3 +241,50 @@ Please commit your changes or stash them before you switch branches.
 Aborting
 ```
 using ` git stash`
+
+## chapter 10
+git add -p only for the file with no merge conflict.
+For example, if use `git add -p` to  `baz` that merged with conflict.
+Then I got the message:
+```
+ignoring unmerged: baz
+No changes.
+```
+
+The `git diff` gives the output:  
+```
+diff --cc baz
+index f836512,1c52108..0000000
+--- a/baz
++++ b/baz
+@@@ -1,4 -1,4 +1,8 @@@
+  a=1
+- b=0
++ b=1
+  let c=$a/$b
+++<<<<<<< HEAD
+ +printf "The answer is %d" $c
+++=======
++ echo $c
+++>>>>>>> bugfix
+```  
+if dont commit changes. Doing instead `git reset baz`  
+After that, type `git merge bugfix`  
+I got  
+```
+fatal: You have not concluded your merge (MERGE_HEAD exists).
+Please, commit your changes before you merge.
+```  
+it seems there is a head created after merge
+
+`git mergetool` usage scenario :  
+already performed the `git merge branchname` but the merge conflicted  
+then use the `mergetool`. If typing `git mergetool` before the merge operation,  
+get the message :  
+```
+This message is displayed because 'merge.tool' is not configured.
+See 'git mergetool --tool-help' or 'git help config' for more details.
+'git mergetool' will now attempt to use one of the following tools:
+opendiff kdiff3 tkdiff xxdiff meld tortoisemerge gvimdiff diffuse diffmerge ecmerge p4merge araxis bc codecompare emerge vimdiff
+No files need merging
+```  
