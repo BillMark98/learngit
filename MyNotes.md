@@ -288,3 +288,55 @@ See 'git mergetool --tool-help' or 'git help config' for more details.
 opendiff kdiff3 tkdiff xxdiff meld tortoisemerge gvimdiff diffuse diffmerge ecmerge p4merge araxis bc codecompare emerge vimdiff
 No files need merging
 ```  
+
+## chapter 11
+#### Questions
+1.where is `clonee existing repository` in th git gui?  
+2. in the `ff.clone1` checkout to `remotes/origin/new_feature`  
+and commit some changes,  
+the `git lol` output:   
+```
+* bc74f22 (HEAD) add remote.txt
+* cb86553 (origin/new_feature, origin/HEAD, new_feature) Committing bar.
+* b62e9b6 Committing foo.
+* d8e2082 (origin/master, master) Committing baz.
+* a4a8eec Committing the README.
+```   
+
+the `git branch -v` output:  
+```
+* (HEAD detached from origin/new_feature) bc74f22 add remote.txt
+  master                                  d8e2082 Committing baz.
+  new_feature                             cb86553 Committing bar.
+```  
+then checkout to master   
+```
+Warning: you are leaving 1 commit behind, not connected to
+any of your branches:
+
+  bc74f22 add remote.txt
+
+If you want to keep it by creating a new branch, this may be a good time
+to do so with:
+
+ git branch <new-branch-name> bc74f22
+
+Switched to branch 'master'
+Your branch is up to date with 'origin/master'.
+```  
+
+then go back to `ff` branch `new_feature`  I did not find the `new.txt`  
+and in the `ff.clone1`  I could not find the branch where I commited the change.   
+### notes
+**bare repositories** can't perform opreations like `git add`  
+e.g create the `ff` directory by running the `make_merge_ff.sh`  
+and use `git clone --bare ff ff.git`  
+cd into `ff.git`  and add new file like `new.txt`  
+then `git add new.txt`  
+I got  
+```
+fatal: this operation must be run in a work tree
+```  
+but `git log`  can be performed, just as in a normal working directory  
+
+
