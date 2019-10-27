@@ -1,4 +1,10 @@
 # Notes on git
+## change language interface of git
+in the `~/.bash_profile` type  
+`alias="LANG=en_US git"`  
+and in the current terminal type `. ~/.bash_profile`  
+here is a link to the [language setting](https://stackoverflow.com/questions/10633564/how-does-one-change-the-language-of-the-command-line-interface-of-git)  
+here is a link to [reload terminal](https://stackoverflow.com/questions/4608187/how-to-reload-bash-profile-from-the-command-line)
 ## chapter 5 using git gui
 here is a good link to [gitk usage](https://lostechies.com/joshuaflanagan/2010/09/03/use-gitk-to-understand-git/)
 ### gitk command
