@@ -248,6 +248,9 @@ Aborting
 ```
 using ` git stash`
 
+some info:
+* [print commit message](https://stackoverflow.com/questions/3357280/print-commit-message-of-a-given-commit-in-git)
+
 ## chapter 10
 git add -p only for the file with no merge conflict.
 For example, if use `git add -p` to  `baz` that merged with conflict.

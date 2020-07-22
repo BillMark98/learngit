@@ -161,7 +161,7 @@ to do so with:
  ### 9.5.2
  options of `git log`
  * `--abbrev-commit` abbreviate the commit message, e.g 
- ```
+ ```git
  commit e57d80e (HEAD -> master, origin/master, origin/HEAD)
 Author: BillMark98 <hupanweibill@gmail.com>
 Date:   Thu Sep 5 17:44:59 2019 +0200
@@ -169,22 +169,40 @@ Date:   Thu Sep 5 17:44:59 2019 +0200
 
 ```
 instead of 
-```
+```bash
 commit e57d80e619fa4c2005f2e9048b513c4ccb265c44 (HEAD -> master, origin/master, origin/HEAD)
 Author: BillMark98 <hupanweibill@gmail.com>
 Date:   Thu Sep 5 17:44:59 2019 +0200
 .....
 ```
-
+2. retrieve the commit id from the commit message, 
+use the command `git rev-parse :/"some words"`  
+for example:
+```git
+panwei@inets-PC:~/Desktop/learngit$ git log --oneline
+dfdbb2c (HEAD -> master, origin/master, origin/HEAD) add info for the language setting
+804cfdc some notes chapter 11
+558876e adding notes and some solutions to chap10
+53c3eb4 some sol to chap 9 ok
+0f01e09 some sol to chapter 9
+e57d80e some notes in chapter 9
+3d950ee Merge branch 'newBranch'
+```
+```git
+panwei@inets-PC:~/Desktop/learngit$ git rev-parse :/"chapter 11"
+804cfdcbbd6479efe50617cbf0f45cfd5fc95e26
+```
+see [here](https://stackoverflow.com/questions/25236100/get-commit-id-from-commit-message-git/25236177)
 * `--all` (according to man page)
 >   Pretend as if all the refs in refs/, along with HEAD, are listed on the command line as         <commit>   
 4. what happens to commits of a branch if branch deleted?
 > the commits will still remain 
+
 see the picture of the two
-the first is the branch plot before the deletion of the branch `newBranch`
-![chap9B1](chap9_branch1.png) 
-the second is the branch plot after the deletion of the branch `newBranch`
-![chap9B2](chap9_branch2.png)
+the first is the branch plot before the deletion of the branch `newBranch`  
+![chap9B1](chap9_branch1.png)   
+the second is the branch plot after the deletion of the branch `newBranch`  
+![chap9B2](chap9_branch2.png)  
 We see that the commits still remain.
 
 ### 9.5.3
