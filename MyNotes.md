@@ -250,7 +250,14 @@ using ` git stash`
 
 some info:
 * [print commit message](https://stackoverflow.com/questions/3357280/print-commit-message-of-a-given-commit-in-git)
+* [amend commit message](https://linuxize.com/post/change-git-commit-message/),
+use the code `git commit --amend -m "revised message"` to modify the latest commit
+* [dashes in `git checkout`](https://superuser.com/questions/1154393/git-checkout-filename-vs-git-checkout-filename)
 
+* [count commit](https://stackoverflow.com/questions/11657295/count-the-number-of-commits-on-a-git-branch)
+also [here](https://stackoverflow.com/questions/677436/how-do-i-get-the-git-commit-count)
+
+* [comit id of tag](https://stackoverflow.com/questions/1862423/how-to-tell-which-commit-a-tag-points-to-in-git#comment1759935_1862542)
 ## chapter 10
 git add -p only for the file with no merge conflict.
 For example, if use `git add -p` to  `baz` that merged with conflict.

@@ -210,12 +210,104 @@ We see that the commits still remain.
     ` git checkout -- <filename>` checkout the file to the latest commited version
 
 ### 9.5.4
+1. find the common origin of all the branches, list the commits and find out that the origin is 
+```bash
+| * 7ecfa4d Commit for file_32584
+| * 15984e7 Commit for file_20278
+| * d2e4a2d Commit for file_14819
+| * 5b94157 Commit for file_22587
+| * 1df5005 Commit for file_5100
+|/  
+* 55906f0 (HEAD -> master, tag: four_files_galore) Adding four empty files.
+* f409c06 Adding b variable.
+* fd1c5fa This is the second commit.
+* 0517638 This is the first commit.
+```  
+the commit tagged `four_files_galore`
+
+2. find out the commit from the aforementioned start point to `branch_30`
+use the command `git rev-list --count 55906..branch_30`
+the notation `git rev-list A..B` means the same as `git rev-list B ^A` which means list all 
+commits that are *reachable* from `B` but not from `A`, where *reachable* in this case means that 
+is the parent commit chronologically. for example in the above case
+```bash
+$ git rev-list four_files_galore..5b94157
+5b94157e5002dc5656913e95e18b3b462cdb1856
+1df5005f663cdaa6c79dacf9a1c89818e371bc24
+```
+we see that the parent commit of 5b94157(including it self) up to the `four_files_galore``is listed.
+
 3. find the branches corresponds to the tag
 e.g for `random_prize_1`
-```
+```bash
 git branch --contains $(git rev-parse random_prize_1)
 ```
+compact version
+```bash
+#/bin/bash
+strVar="random_prize_"
+for variable in 1 2 3
+do
+    tempVar="${strVar}${variable}"
+    git branch --contains ${tempVar}
+done
+```
 
+to list the commit id, use
+`git rev-parse random_prize_1` for one tag
+or 
+`git show-ref --tags` to list commit id for all tags
+add `-d` for the derefence info. see [https://stackoverflow.com/questions/1064499/how-to-list-all-git-tags]
+
+5. `git log --oneline --decorate --simplify-by-decoration --all`
+the option `--simplify-by-decoration` means:
+> Commits that are referred by some branch or tag are selected.
+so example output will only list the branches or tags
+```bash
+8b08a14 (branch_31) Commit for file_8976
+3538c64 (branch_32) Commit for file_23717
+91c7c19 (tag: random_prize_1, branch_33) Commit for file_5555
+7b2f4af (branch_34) Commit for file_13179
+7769f9f (branch_35) Commit for file_18299
+f007a65 (branch_36) Commit for file_15098
+530c6de (branch_37) Commit for file_11725
+8853fdc (branch_38) Commit for file_13549
+aa15314 (branch_39) Commit for file_16674
+44751a0 (branch_40) The answers are in this commit.
+8f7d617 (branch_22) Commit for file_17926
+9187120 (branch_23) Commit for file_28799
+323a5a4 (branch_24) Commit for file_13311
+f3f62c7 (branch_25) Commit for file_16427
+3b0e7b8 (branch_26) Commit for file_17845
+9461e4b (branch_27) Commit for file_12856
+7409199 (branch_28) Commit for file_254
+2bbb2aa (branch_29) Commit for file_19581
+278c2d7 (branch_30) Commit for file_32134
+201349d (branch_21) Commit for file_23027
+d05cd34 (tag: random_tag_on_file) Randomly tagged file on Branch 21.
+05f8b21 (tag: random_prize_3, branch_19) Commit for file_19420
+cfb75f8 (branch_20) Commit for file_32022
+153f832 (branch_18) Commit for file_26798
+1f8d762 (branch_15) Commit for file_13036
+ef66fca (tag: random_prize_2, branch_16) Commit for file_11794
+07dee39 (branch_17) Commit for file_22978
+8c0f3dc (branch_03) Commit for file_25100
+b743cad (branch_04) Commit for file_13921
+0270f8e (branch_05) Commit for file_2807
+eaa4663 (branch_06) Commit for file_15922
+d4842af (branch_07) Commit for file_19473
+e52ea6e (branch_08) Commit for file_1963
+ec7268f (branch_09) Commit for file_29622
+81c2297 (branch_10) Commit for file_28873
+a35c558 (branch_11) Commit for file_27911
+a4ababf (branch_12) Commit for file_1776
+d258875 (branch_13) Commit for file_7407
+fe36ecc (branch_14) Commit for file_29630
+677ceed (branch_01) Commit for file_20106
+4cc6271 (branch_02) Commit for file_3024
+55906f0 (HEAD -> master, tag: four_files_galore) Adding four empty files.
+0517638 This is the first commit.
+```
 ## chapter 10
 ### Lab
 4. sample output  
