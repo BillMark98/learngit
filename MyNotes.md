@@ -304,6 +304,169 @@ See 'git mergetool --tool-help' or 'git help config' for more details.
 opendiff kdiff3 tkdiff xxdiff meld tortoisemerge gvimdiff diffuse diffmerge ecmerge p4merge araxis bc codecompare emerge vimdiff
 No files need merging
 ```  
+* tricky things about `git diff`
+[the .. and ...](https://stackoverflow.com/questions/7251477/what-are-the-differences-between-double-dot-and-triple-dot-in-git-dif)
+also [here](https://stackoverflow.com/questions/462974/what-are-the-differences-between-double-dot-and-triple-dot-in-git-com) 
+In the example in listing 10.2, we use `git diff master...bugfix` it shows the output
+```bash
+$ git diff master...bugfix
+diff --git a/baz b/baz
+index 56d6546..1c52108 100644
+--- a/baz
++++ b/baz
+@@ -1,3 +1,4 @@
+ a=1
+-b=0
++b=1
+ let c=$a/$b
++echo $c
+```   
+however, when typing `git diff bugfix...master`:
+```bash
+$ git diff bugfix...master
+diff --git a/bar b/bar
+new file mode 100644
+index 0000000..e69de29
+diff --git a/foo b/foo
+new file mode 100644
+index 0000000..e69de29
+```  
+The reason is that when we see the log output:
+```bash
+$ git lol
+* e8c9e43 (bugfix) Ugh, I was dividing by zero!
+* 3b29d2a Adding echo to check error.
+| * 3a1b15f (HEAD -> master) Committing bar.
+| * 2a863e4 Committing foo.
+|/  
+* cfa52c9 (tag: bug_here) Committing baz.
+* f4a99b1 Committing the README.
+```  
+where `git lol` stands for `git log --graph --decorate --pretty=oneline --all --abbrev-commit`
+and the `master...bugfix` is essentially the difference between `bug_here` and `bugfix`.  
+doing `bugfix...master` is essentially the differerence between `bug_here` and `master`, but 
+there is no difference between the file `baz` of the latter two, so the output is trivial.
+
+* list all aliases
+`git config --get-regexp ^alias\.`
+see [here](https://stackoverflow.com/questions/7066325/list-git-aliases/22183573), also [here](https://stackoverflow.com/questions/39466417/how-do-i-search-my-git-aliases)
+
+* set up merge-tool
+- see [here](https://gist.github.com/karenyyng/f19ff75c60f18b4b8149)
+- use [vimdiff](https://stackoverflow.com/questions/14904644/how-do-i-use-vimdiff-to-resolve-a-git-merge-conflict)
+- [accept both changes in vimdiff](https://vi.stackexchange.com/questions/10534/is-there-a-way-to-take-both-when-using-vim-as-merge-tool)
+  or [here](https://stackoverflow.com/questions/36701875/how-do-i-accept-both-changes-in-vimdiff-hunk)
+  - useful g command in vim, see [here](https://vim.fandom.com/wiki/Power_of_g) or [here](https://stackoverflow.com/questions/45086981/what-are-the-vim-commands-that-start-with-g)
+
+* git reset, checkout difference
+see [here](https://stackoverflow.com/questions/3639342/whats-the-difference-between-git-reset-and-git-checkout), basically, I think 
+`git reset` moves the `HEAD` and the reference branch, where as `git checkout` moves only the `HEAD`, e.g
+suppose currently, `HEAD` points to `master` and we are in master, `git reset 9erwe1` will move `HEAD` and `master` pointing to `9erwe1`, where as
+`git checkout 9erwe1` will only moves `HEAD` to point to `9erwe1` and leaves master unchaged, in this case `9erwe1` is only a commit, not a branch, 
+the `HEAD` will be in the detached state, meaning the current `HEAD` is not pointing at any branch, see `git lol` for example.
+```bash
+$ git lol
+* 33d3d3b (HEAD -> new_feature) Committing bar.
+* bce0214 Committing foo.
+* 3990744 (master) Committing baz.
+* 8624d4c Committing the README.
+```  
+move the `HEAD`
+
+```bash
+$ git checkout bce0214
+$ git lol
+* 33d3d3b (new_feature) Committing bar.
+* bce0214 (HEAD) Committing foo.
+* 3990744 (master) Committing baz.
+* 8624d4c Committing the README.
+```  
+We see in particular the `HEAD` does not have a `->` pointing symbol, meaning it is not point to any branch,   
+Now, using `git reset`
+```bash
+$ git reset master
+$ git lol
+* 3990744 (HEAD -> new_feature, master) Committing baz.
+* 8624d4c Committing the README.
+
+```
+
+Interestingly, if we tagged the commit between the original new_feature and master, the tagged will not be omitted in the output of `git lol`
+we get:
+```bash
+$ git reset master
+$ git lol
+* bce0214 (tag: fooCommit) Committing foo.
+* 3990744 (HEAD -> new_feature, master) Committing baz.
+* 8624d4c Committing the README.
+```  
+
+Another tricky thing.
+After performign the merge:
+```bash
+$ git lol
+* 33d3d3b (HEAD -> master, new_feature) Committing bar.
+* bce0214 Committing foo.
+* 3990744 Committing baz.
+* 8624d4c Committing the README.
+```  
+
+```bash
+$ git reset 3990744
+$ git lol
+* 33d3d3b (new_feature) Committing bar.
+* bce0214 Committing foo.
+* 3990744 (HEAD -> master) Committing baz.
+* 8624d4c Committing the README.
+```   
+
+```bash
+$ git merge new_feature --no-ff
+error: The following untracked working tree files would be overwritten by merge:
+	bar
+	foo
+Please move or remove them before you merge.
+Aborting
+$ ls
+bar  baz  foo  README.txt
+```  
+Note that the two files `bar ` and `foo` should not exist at the current commit. So it means that master has moved to point to the second commit, but
+the content remain unchanged, (the content of the original master), deleting the two files to get the content of the second commit. 
+Merge with `new_feature`:
+```bash
+$ git merge new_feature 
+Updating 3990744..33d3d3b
+Fast-forward
+ bar | 0
+ foo | 0
+ 2 files changed, 0 insertions(+), 0 deletions(-)
+ create mode 100644 bar
+ create mode 100644 foo
+$ ls
+bar  baz  foo  README.txt
+$ git branch -v
+* master      33d3d3b Committing bar.
+  new_feature 33d3d3b Committing bar.
+$ git lol
+* 33d3d3b (HEAD -> master, new_feature) Committing bar.
+* bce0214 Committing foo.
+* 3990744 Committing baz.
+* 8624d4c Committing the README.
+```  
+
+Note that the master and new_feature points to the same commit.
+
+```bash
+$ git lol
+*   c8819ca (HEAD -> master) Hello, Merge branch 'new_feature'
+|\  
+| * 33d3d3b (new_feature) Committing bar.
+| * bce0214 Committing foo.
+|/  
+* 3990744 Committing baz.
+* 8624d4c Committing the README.
+
+```
 
 ## chapter 11
 #### Questions
@@ -355,4 +518,36 @@ fatal: this operation must be run in a work tree
 ```  
 but `git log`  can be performed, just as in a normal working directory  
 
-
+## chapter12
+After modifying the `math.bob` (create a new file) and commit the change, in the 
+`math.carol` directory,  
+```bash
+$ git ls-remote origin
+810d4d3e4beb183f9d1d7af502f0bf165c4317bf        HEAD
+949b4a072c0d80c1cce11d10be00fba7da63d009        refs/heads/another_fix_branch
+810d4d3e4beb183f9d1d7af502f0bf165c4317bf        refs/heads/master
+19d383634b1ebc7a9f8fab35242c13fda4ffbae6        refs/heads/new_feature
+d32448b54b78414a6d474e8a3638b45eeef165a7        refs/tags/four_files_galore
+90bf612ddd601fc52bb6e5a14197a9c57711442b        refs/tags/four_files_galore^{}
+$ git ls-remote
+From /home/panwei/Desktop/learngit/sourceCode/math.git
+810d4d3e4beb183f9d1d7af502f0bf165c4317bf        HEAD
+949b4a072c0d80c1cce11d10be00fba7da63d009        refs/heads/another_fix_branch
+810d4d3e4beb183f9d1d7af502f0bf165c4317bf        refs/heads/master
+19d383634b1ebc7a9f8fab35242c13fda4ffbae6        refs/heads/new_feature
+d32448b54b78414a6d474e8a3638b45eeef165a7        refs/tags/four_files_galore
+90bf612ddd601fc52bb6e5a14197a9c57711442b        refs/tags/four_files_galore^{}
+$ git ls-remote bob
+72c78fcee7dc4d0b5d7c7aa47e848f018ce73dd2        HEAD
+72c78fcee7dc4d0b5d7c7aa47e848f018ce73dd2        refs/heads/master
+810d4d3e4beb183f9d1d7af502f0bf165c4317bf        refs/remotes/origin/HEAD
+949b4a072c0d80c1cce11d10be00fba7da63d009        refs/remotes/origin/another_fix_branch
+810d4d3e4beb183f9d1d7af502f0bf165c4317bf        refs/remotes/origin/master
+19d383634b1ebc7a9f8fab35242c13fda4ffbae6        refs/remotes/origin/new_feature
+d32448b54b78414a6d474e8a3638b45eeef165a7        refs/tags/four_files_galore
+90bf612ddd601fc52bb6e5a14197a9c57711442b        refs/tags/four_files_galore^{}
+```  
+We see that the output for the `git ls-remote` and `git ls-remote origin` is the same.
+But the `git ls-remote bob` differs because we have commited new changes. 
+It is worth noting that `git ls-remote` in this case aligns with `git ls-remote origin`, ignoring
+the change of another remote (bob). In general to list the specific data of remote, type the remote name, e.g `git ls-remote bob`
